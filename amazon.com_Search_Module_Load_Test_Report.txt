@@ -1,0 +1,62 @@
+Amazon.com Search Module Load Test Report
+Introduction
+This report details the load test scenarios and a basic JMeter implementation for the search module of n11.com. The objective is to investigate the behavior of the search module under load and provide a foundation for further performance analysis. Due to persistent Cloudflare blocking of direct access to n11.com, I continued testing on amazon.com. The limits specified in the assertion were chosen arbitrarily, as no specific requirements were provided in the task.
+Test Scenarios
+The following test scenarios are designed to cover typical user interactions with an e-commerce search functionality. Each scenario outlines the objective, steps, and expected results.
+
+1. Successful Product Search
+Objective: To verify that the search module can successfully process common product queries and return relevant results under load.
+
+Scenario Steps:
+1User navigates to the amazon.com homepage .
+2User enters a 5 different product names ( "laptop", "shoes", "t-shirt", “ssd”, “men”) into the search bar.
+3User initiates the search.
+4Expected Result: The system returns a search results page displaying a list of relevant products. 
+		* Response Status Code 200
+		* Respose Header Assertion : Content-Type: text/html;charset=UTF-8
+		* Duration Assertion: <2000 miliseconds
+		* Size Assertion: <230000
+		* Response Body Assertion: Contains Search Term
+Inputs:
+User: 1
+Ramp-up: 1
+Loop Count: 15
+     * Include counter: 5 
+2. Product Search With Special Chars - No Results
+Objective: To assess the system's behavior and performance when a search query yields no matching products.
+
+Scenario Steps:
+1    User navigates to the amazon.com homepage .
+2    User enters a Special Char search item name (“$$$$${}&&&&&&”)
+3    User initiates the search.
+4    Expected Result: The system returns a search results page indicating no products found (e.g., "No results for your search query"). 
+           * Response Status Code 200
+	   * Respose Header Assertion : Content-Type: text/html;charset=UTF-8
+	   * Duration Assertion: <1400 miliseconds
+	   * Size Assertion: <150000
+	   * Response Body Assertion: Contains Search “No results for your search query”
+Inputs:
+User: 1
+Ramp-up: 1
+Loop Count: 5
+    
+3. Search with Invalid Search Input
+Objective: To assess the system's behavior and performance when a search query yields no matching products.
+
+Scenario Steps:
+1    User navigates to the amazon.com homepage .
+2    User enters a Special Char search item name (“ğpüüğpüğşnifnüğfşüğşğünbüfş).
+3    User initiates the search.
+4    Expected Result: The system should handle the input gracefully, either by sanitizing it, returning no results, or displaying an appropriate error message without crashing or exposing vulnerabilities. Response time should be acceptable.
+		
+	   * Response Status Code 200
+	   * Respose Header Assertion : Content-Type: text/html;charset=UTF-8
+	   * Duration Assertion: <1400 miliseconds
+	   * Size Assertion: <150000
+	   * Response Body Assertion: Contains Search “No results for your search query”
+Inputs:
+User: 1
+Ramp-up: 1
+Loop Count: 5
+	 
+
