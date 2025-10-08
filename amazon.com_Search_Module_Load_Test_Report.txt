@@ -22,6 +22,8 @@ User: 1
 Ramp-up: 1
 Loop Count: 15
      * Include counter: 5 
+
+
 2. Product Search With Special Chars - No Results
 Objective: To assess the system's behavior and performance when a search query yields no matching products.
 
@@ -40,6 +42,7 @@ User: 1
 Ramp-up: 1
 Loop Count: 5
     
+
 3. Search with Invalid Search Input
 Objective: To assess the system's behavior and performance when a search query yields no matching products.
 
@@ -59,4 +62,5 @@ User: 1
 Ramp-up: 1
 Loop Count: 5
 	 
+
 
